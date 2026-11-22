@@ -23,9 +23,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'docker run --rm jenkins-flask-lab:${BUILD_NUMBER} ls -la /app'
-                sh 'docker run --rm jenkins-flask-lab:${BUILD_NUMBER} python -c "import sys; print(sys.path)"'
-                sh 'docker run --rm jenkins-flask-lab:${BUILD_NUMBER} pytest -v'
+                sh 'docker run --rm -e PYTHONPATH=/app jenkins-flask-lab:${BUILD_NUMBER} pytest -v'
             }
         }
 
